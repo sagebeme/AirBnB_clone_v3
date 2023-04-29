@@ -6,6 +6,7 @@ from flask import Flask
 from models import storage
 from api.v1.views import app_views
 from os import environ
+from flask import Flask, jsonify
 
 
 app = Flask(__name__)
@@ -18,16 +19,18 @@ def close_db(error):
     teardown:calls storage close
     """
     storage.close()
-# end def
 
 
-@app.route('/')
-def name():
+@app.errorhandler(404)
+def not_foud():
     """
-    Purpose:
+    Purpose: 404 Not found
+    ---
+    responses:
+        404:
+            description: it wasn't found
     """
-
-# end def
+    return jsonify({'error': "Not found"}), 404
 
 
 if __name__ == "__main__":

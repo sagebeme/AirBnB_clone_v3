@@ -27,7 +27,7 @@ def get_amenities():
                  strict_slashes=False)
 def get_amenities(amenity_id):
     """
-    Purpose: Gets an amenity
+    Purpose: Gets an amenity from the dict with an ID
     """
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
