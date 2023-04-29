@@ -5,6 +5,7 @@
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
+from os import environ
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ def name():
     """
     teardown:calls storage close
     """
-    storage.close
+    storage.close()
 # end def
 
 
