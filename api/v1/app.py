@@ -30,7 +30,7 @@ def not_foud():
         404:
             description: it wasn't found
     """
-    return jsonify({'error': "Not found"}), 404
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
