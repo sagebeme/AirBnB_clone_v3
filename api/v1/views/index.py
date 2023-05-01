@@ -11,7 +11,7 @@ from models.state import State
 from models.user import User
 from models import storage
 from api.v1.views import app_views
-from flask import jsonify
+from flask import jsonify, request
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
@@ -19,7 +19,9 @@ def status():
     """
     status: Status of API
     """
-    return jsonify({"status":"OK"})
+    if request.method == 'GET':
+        resp ={"status":"OK"}
+    return jsonify(resp)
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
@@ -30,7 +32,8 @@ def get_stats():
     classes = [Amenity, City, Place, Review, State, User]
     names = ["amenity", "city", "place", "review", "states", "users"]
 
-    num_obj = {}
-    for i in range(len(classes)):
-        num_obj[names[i]] = storage.count(classes[i])
-    return jsonify(num_obj)
+    if request.method == 'GET':
+        num_obj = {}
+        for i in range(len(classes)):
+            num_obj[names[i]] = storage.count(classes[i])
+        return jsonify(num_obj)
