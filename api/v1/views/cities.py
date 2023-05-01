@@ -10,7 +10,8 @@ from flask import abort, jsonify, request
 @app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
 def get_cities(state_id):
     """
-    Retrieves the list of all cities objects of a specific State, or a specific city
+    Retrieves the list of all cities objects
+    of a specific State, or a specific city
     """
     list_cities = []
     state = storage.get(State, state_id)
