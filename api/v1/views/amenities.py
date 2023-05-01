@@ -11,16 +11,16 @@ from api.v1.views import app_views
 from flask import abort, jsonify, request
 
 
-@app_view.route('/amenities', methods=['GET'], strict_slashes=False)
-def get_amenities():
-    """
-    Purpose: Gets a list of all amenities
-    """
-    all_amenities = storage.all(Amenity).values()
-    list_amenities = []
-    for amenity in all_amenities:
-        list_amenities.append(amenity.to_dict())
-    return jsonify(list_amenities)
+# @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
+# def get_amenities():
+#     """
+#     Purpose: Gets a list of all amenities
+#     """
+#     all_amenities = storage.all(Amenity).values()
+#     list_amenities = []
+#     for amenity in all_amenities:
+#         list_amenities.append(amenity.to_dict())
+#     return jsonify(list_amenities)
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET'],
@@ -39,7 +39,9 @@ def get_amenities(amenity_id):
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_amenity(amenity_id):
-    """ Deletes a Amenity object """
+    """
+    Deletes a Amenity object
+    """
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
