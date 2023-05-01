@@ -88,6 +88,6 @@ class FileStorage:
             for clas in self.__objects.values():
                 if type(clas) == cls:
                     count += 1
-                return count
-            else:
-                return len(self.__objects)
+            return count
+        else:
+            return len(self.__objects)
