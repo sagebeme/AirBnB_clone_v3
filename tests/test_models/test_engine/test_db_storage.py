@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+from models import storage
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -70,7 +71,9 @@ test_db_storage.py'])
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+
+    @unittest.skipIf(models.storage_t != 'db',
+                     "not testing db storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionaty"""
         self.assertIs(type(models.storage.all()), dict)
@@ -86,3 +89,27 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    def test_get_db(self):
+        """
+        Purpose: test method for getting db storage instance
+        """
+        dic = {"name": "NewYork"}
+        instance = State(**dic)
+        storage.new(instance)
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
+
+    def test_count():
+        """
+        Purpose: tests count db storage method
+        """
+        dic = {"name": "Arizona"}
+        state = State(**dic)
+        storage.new(state)
+        dic = {"name": "Florida", "state_id": state.id}
+        city = City(city)
+        storage.new(city)
+        storage.save()
+        counting = storage.count()
+        self.assertEqual(len(storage.all()), counting)

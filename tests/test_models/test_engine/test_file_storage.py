@@ -113,3 +113,21 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+
+class TestFileStorageMethods(unittest.TestCase):
+    """
+    Tests file storage methods
+    """
+    def test_get_file_storage():
+        """
+        Purpose: gets a method for obtaining an instance file storage
+        """
+        storage = FileStorage()
+        dic = {"name": "NewYork"}
+        instance = State(**dic)
+        storage.new(instance)
+        storage.save()
+        storage = FileStorage()
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
